@@ -1,0 +1,17 @@
+body {
+    background-color: #e3e7eb;
+    box-shadow: 0px 3px 8px grey;
+}
+
+.container-card {
+    box-shadow: 0px 5px 25px gray;
+}
+
+.card {
+    background-color: #e3e7eb;
+    box-shadow: 0px 3px 8px grey;
+}
+
+.card-project {
+    box-shadow: 0px 5px 25px gray;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail Page</title>
+    <link rel="shortcut icon" href="../public/img/page-icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="../public/css/project-page.css">
+</head>
+<body class="m-0 p-0">
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid mx-5 px-5 gap-3">
+            <a class="navbar-brand" href="https://dumbways.id/" target="_blank">
+                <img src="../public/img/logo-dumbways.png" width="60px">
+            </a>
+            <div class="navbar-collapse">
+                <div class="navbar-nav gap-3">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                    {{if .Data.IsLogin}}
+                    <a class="nav-link" href="/formProject">Add Project</a>
+                    {{end}}
+                </div>
+            </div>
+            <div class="navbar-nav gap-3 float-end">
+                {{if .Data.IsLogin}}
+                <a class="nav-link" aria-current="page" href="/">Hello, {{.Data.UserName}}</a>
+                <a class="nav-link" href="/logout">logout</a>
+                {{else}}
+                <a class="nav-link" href="/formRegister">Register</a>
+                <a class="nav-link" href="/formLogin">Login</a>
+                {{end}}
+            </div>
+            <div class="float-end" >
+                <button type="button" class="btn btn-dark">
+                    <a href="/contact" class="text-decoration-none text-white">contact me</a>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container-content d-flex flex-column m-5 px-5">
+        <h1 class="fw-bold fs-3 text-center mb-5">
+            {{.projectDetail.Title}}
+        </h1>
+        <div class="section-1 d-flex justify-content-evenly flex-row">
+           
+            <img src="/uploads/{{.projectDetail.Image}}" class="rounded-4 w-50"/>
+           
+            <div class="project-details d-flex flex-column fs-5">
+                <div class="duration d-flex flex-column mb-3">
+                    <p class="text-dur fw-bold mb-2 mt-3">Duration</p>
+                    <div class="date d-flex flex-row gap-2">
+                        <i class="fa-solid fa-calendar-days fs-4"></i>
+                        <p class="text-muted">{{.projectDetail.Format_start}} - {{.projectDetail.Format_end}}</p>
+                    </div>
+                    <div class="time d-flex flex-row gap-2">
+                        <i class="fa-regular fa-clock fs-3"></i>
+                        <p class="text-muted">{{.projectDetail.Duration}}</p>
+                    </div>
+                </div>
+                <p class="tech-title mb-2 fw-bold">Technologies</p>
+                <div class="project-tech d-flex flex-row gap-5 flex-wrap">
+                    {{if eq (index .projectDetail.Technologies 0) "reactjs"}}
+                    <p class="text-muted"><i class="fa-brands fa-react fs-2 text-dark"></i> React Js</p>
+                    {{end}}
+                    {{if eq (index .projectDetail.Technologies 1) "nodejs"}}
+                    <p class="text-muted"><i class="fa-brands fa-node-js fs-2 text-dark"></i> Node Js</p>
+                    {{end}}
+                </div>
+                <div class="project-tech d-flex flex-row gap-5 flex-wrap"> 
+                    {{if eq (index .projectDetail.Technologies 2) "javascript"}}
+                    <p class="text-muted"><i class="fa-brands fa-square-js fs-2 text-dark"></i> JavaScript</p>
+                    {{end}}
+                    {{if eq (index .projectDetail.Technologies 3) "golang"}}
+                    <p class="text-muted"><i class="fa-brands fa-golang fs-2 text-dark"></i> Golang</p>
+                    {{end}}
+                </div>
+            </div>
+        </div>
+        <div class="section-2 mt-5">
+            <p>
+                {{.projectDetail.Description}}
+            </p>
+        </div>
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+</body>
+</html>

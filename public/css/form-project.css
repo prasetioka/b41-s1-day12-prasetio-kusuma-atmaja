@@ -1,0 +1,26 @@
+body {
+    background-color: #e3e7eb;
+}
+
+form {
+    margin-left: 35vw;
+    margin-right: 35vw;
+}
+
+form input, select, textarea {
+    border: none;
+    resize: none;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 8px grey;
+}
+
+form .project-tech .tech-option .d-flex input {
+    box-shadow: 0;
+}
+
+@media screen and (max-width: 1000px) {
+    form {
+        margin-left: 6vw;
+        margin-right: 6vw;
+    }
+}

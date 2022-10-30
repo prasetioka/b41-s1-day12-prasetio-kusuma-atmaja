@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page Prasetio Kusuma Atmaja</title>
+    <link rel="shortcut icon" href="../public/img/page-icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="../public/css/index.css">
+</head>
+
+<body class="m-0 p-0">
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid mx-5 px-5 gap-3">
+            <a class="navbar-brand" href="https://dumbways.id/" target="_blank">
+                <img src="../public/img/logo-dumbways.png" width="60px">
+            </a>
+            <div class="navbar-collapse">
+                <div class="navbar-nav gap-3">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                    {{if .Data.IsLogin}}
+                    <a class="nav-link" href="/formProject">Add Project</a>
+                    {{end}}
+                </div>
+            </div>
+            <div class="navbar-nav gap-3 float-end">
+                {{if .Data.IsLogin}}
+                <a class="nav-link" aria-current="page" href="/">Hello, {{.Data.UserName}}</a>
+                <a class="nav-link" href="/logout">logout</a>
+                {{else}}
+                <a class="nav-link" href="/formRegister">Register</a>
+                <a class="nav-link" href="/formLogin">Login</a>
+                {{end}}
+            </div>
+            <div class="float-end" >
+                <button type="button" class="btn btn-dark">
+                    <a href="/contact" class="text-decoration-none text-white">contact me</a>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    {{if .Data.FlashData}}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>{{.Data.FlashData}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {{end}}
+
+    <div class="wrapper-card p-5 m-5">
+        <div class="container-card rounded-3 d-flex justify-content-center align-items-center bg-white p-5">
+            <div class="card-left d-flex flex-column pe-4">
+                <div class="card-description d-flex flex-column">
+                    <h1 class="fs-4 fw-bold">Hi ! Welcome to my personal web</h1>
+                    <p class="fs-6">
+                        Saya adalah seorang calon Fullstack Developer yang saat ini sedang mengikuti program pelatihan
+                        Bootcamp yang diselenggarakan oleh <b>Dumbways.id</b> pada batch ke-41. Halaman web berikut ini
+                        merupakan bagian dari tugas yang wajib dikerjakan dalam proses menuju kelulusan dari tahapan
+                        pelatihan Stage-1. Anda dapat mengklik "contact" untuk mengirim pesan langsung kepada Saya atau klik
+                        icon social media untuk mengetahui lebih tentang Saya.
+                    </p>
+                </div>
+                <div class="card-button">
+                    <button class="btn btn-dark px-4">
+                        <a class="a-contact text-decoration-none text-white" href="/contact">contact</a>
+                    </button>
+                    <button class="btn btn-link text-decoration-none">
+                        <a class="a-download text-decoration-none text-dark" href="https://dumbways.id/"
+                            target="_blank">download CV <i class="fa-solid fa-download"></i></a>
+                    </button>
+                </div>
+                <div class="card-icon d-flex fs-2 gap-3 mt-3">
+                    <a href="https://www.linkedin.com/in/prasetioka/" target="_blank">
+                        <i class="fa-brands fa-linkedin text-dark text-decoration-none"></i>
+                    </a>
+                    <a href="https://www.instagram.com/prasetioka/" target="_blank">
+                        <i class="fa-brands fa-square-instagram text-dark text-decoration-none"></i>
+                    </a>
+                    <a href="https://www.facebook.com/prasetiokusuma.atmaja.1/" target="_blank">
+                        <i class="fa-brands fa-square-facebook text-dark text-decoration-none"></i>
+                    </a>
+                    <a href="https://twitter.com/AtmajaPrasetio" target="_blank">
+                        <i class="fa-brands fa-square-twitter text-dark text-decoration-none"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card-right">
+                <div class="card d-flex flex-column gap-0 border-0">
+                    <img src="../public/img/profile-new.jpg" width="200px" class="rounded-top">
+                    <div class="my-name d-flex flex-column text-center my-3">
+                        <h2 class="fs-5 fw-bold mb-0">Prasetio Kusuma A.</h2>
+                        <h3 class="fs-6 mt-0">Fullstack Developer</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{if .Data.IsLogin}}
+    <div class="wrapper-project bg-light p-5">
+        <div class="section-project d-flex flex-column justify-content-center px-5">
+            <h1 class="text-center fs-3 fw-bold mb-5">MY PROJECT</h1>
+            <div id="contents" class="grid-container d-flex flex-row justify-content-between flex-wrap gap-5">
+                
+                {{range $index, $data := .projectRender}}
+                <div class="card-project bg-white d-flex flex-column p-3 rounded-4 w-25">
+                    <a class="d-flex flex-column mb-3" href="/projectDetail/{{$data.Id}}">
+                        <img src="/uploads/{{$data.Image}}" class="rounded-3 img-fluid">
+                    </a>
+                    <h2 class="fs-5 fw-bold">{{$data.Title}}</h2>
+                    <h3 class="fs-6 text-muted">{{$data.Duration}}</h3>
+                    <p class="fs-6 mt-3 mb-0">{{$data.Description}}</p>
+                    <div class="card-icon d-flex flex-row align-items-center mb-3 gap-3 fs-2 ">
+                        {{if eq (index $data.Technologies 0) "reactjs"}}
+                        <a href="#"><i class="fa-brands fa-react fs-3 text-dark"></i></a>
+                        {{end}}
+                        {{if eq (index $data.Technologies 1) "nodejs"}}
+                        <a href="#"><i class="fa-brands fa-node-js fs-3 text-dark"></i></a>
+                        {{end}}
+                        {{if eq (index $data.Technologies 2) "javascript"}}
+                        <a href="#"><i class="fa-brands fa-square-js fs-3 text-dark"></i></a>
+                        {{end}}
+                        {{if eq (index $data.Technologies 3) "golang"}}
+                        <a href="#"><i class="fa-brands fa-golang text-dark"></i></a>
+                        {{end}}
+                    </div>
+                    <div class="card-button d-flex flex-row gap-3">
+                        <a href="/updateForm/{{$data.Id}}" class="btn btn-dark w-100">update</a>
+                        <a href="/deleteProject/{{$data.Id}}" class="btn btn-dark w-100">delete</a>
+                    </div>
+                    <p class="text-muted fst-italic text-end mb-0">written by {{$data.Author}}</p>
+                </div>
+                {{end}}
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="wrapper-project bg-light p-5">
+        <div class="section-project d-flex flex-column justify-content-center px-5">
+            <h1 class="text-center fs-3 fw-bold mb-5">MY PROJECT</h1>
+            <div id="contents" class="grid-container d-flex flex-row justify-content-between flex-wrap gap-5">
+                
+                {{range $index, $data := .projectRender}}
+                <div class="card-project bg-white d-flex flex-column p-3 rounded-4 w-25">
+                    <a class="d-flex flex-column mb-3" href="/projectDetail/{{$data.Id}}">
+                        <img src="/uploads/{{$data.Image}}" class="rounded-3 img-fluid">
+                    </a>
+                    <h2 class="fs-5 fw-bold">{{$data.Title}}</h2>
+                    <h3 class="fs-6 text-muted">{{$data.Duration}}</h3>
+                    <p class="fs-6 mt-3 mb-0">{{$data.Description}}</p>
+                    <div class="card-icon d-flex flex-row align-items-center mb-3 gap-3 fs-2 ">
+                        {{if eq (index $data.Technologies 0) "reactjs"}}
+                        <a href="#"><i class="fa-brands fa-react fs-3 text-dark"></i></a>
+                        {{end}}
+                        {{if eq (index $data.Technologies 1) "nodejs"}}
+                        <a href="#"><i class="fa-brands fa-node-js fs-3 text-dark"></i></a>
+                        {{end}}
+                        {{if eq (index $data.Technologies 2) "javascript"}}
+                        <a href="#"><i class="fa-brands fa-square-js fs-3 text-dark"></i></a>
+                        {{end}}
+                        {{if eq (index $data.Technologies 3) "golang"}}
+                        <a href="#"><i class="fa-brands fa-golang text-dark"></i></a>
+                        {{end}}
+                    </div>
+                    <p class="text-muted fst-italic text-end mb-0">written by {{$data.Author}}</p>
+                </div>
+                {{end}}
+            </div>
+        </div>
+    </div>
+    {{end}}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+</body>
+</html>
